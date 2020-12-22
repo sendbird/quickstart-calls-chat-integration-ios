@@ -29,8 +29,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NotificationDe
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-//        ConnectionManager.login { (user, error) in
-//        }
+        ConnectionManager.login { (chatUser, callUser, error) in
+        }
         
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: UIWindow.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: UIWindow.keyboardWillHideNotification, object: nil)
@@ -61,12 +61,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NotificationDe
             }
         }
         
-//        let authStatus = PHPhotoLibrary.authorizationStatus()
-//        if authStatus != PHAuthorizationStatus.authorized {
-//            PHPhotoLibrary.requestAuthorization { (status) in
-//                
-//            }
-//        }
+        let authStatus = PHPhotoLibrary.authorizationStatus()
+        if authStatus != PHAuthorizationStatus.authorized {
+            PHPhotoLibrary.requestAuthorization { (status) in
+                
+            }
+        }
         
         let autoLogin = UserDefaults.standard.bool(forKey: "sendbird_auto_login")
         if autoLogin {
@@ -150,15 +150,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate, NotificationDe
             
             self.setUIsWhileConnecting()
             
-            ConnectionManager.login(userId: id, nickname: nick) { user, error in
+            ConnectionManager.login(userId: id, nickname: nick) { chatUser, callUser, error in
                 guard error == nil else {
                     DispatchQueue.main.async {
                         self.setUIsForDefault()
                     }
-                    
-                    if let error = error {
-                        Utils.showAlertController(error: SBDError.init(nsError: error), viewController: self)
-                    }
+                    Utils.showAlertController(error: error, viewController: self)
                     
                     return
                 }

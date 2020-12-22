@@ -14,6 +14,10 @@ import AVFoundation
 import Alamofire
 import AlamofireImage
 
+import CallKit
+import SendBirdCalls
+import PushKit
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, SBDChannelDelegate {
 
@@ -21,14 +25,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var receivedPushChannelUrl: String?
     var pushReceivedGroupChannel: String?
 
+    var queue: DispatchQueue = DispatchQueue(label: "com.sendbird.calls.quickstart.appdelegate")
+    var voipRegistry: PKPushRegistry?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        SBDMain.initWithApplicationId("9880C4C1-E6C8-46E8-A8F1-D5890D598C08")
+        SBDMain.initWithApplicationId(<#Sendbird Application ID#>)
+        SendBirdCall.configure(appId: <#Sendbird Application ID#>)
+        
         SBDMain.add(self as SBDChannelDelegate, identifier: self.description)
         self.registerForRemoteNotification()
         SBDMain.setAppGroup("group.com.sendbird.sample4");
         
-        DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
+        SendBirdCall.addDelegate(self, identifier: "com.sendbird.sample4.calls.delegate")
+        self.voipRegistration()
+        SendBirdCall.executeOn(queue: DispatchQueue.main)
         
+        DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
         UINavigationBar.appearance().tintColor = UIColor(named: "color_navigation_tint")
         
         let audioSession = AVAudioSession.sharedInstance()
@@ -37,13 +49,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         } catch {
             print("Setting category to AVAudioSessionCategoryPlayback failed.")
         }
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        if let window = self.window {
-//            let mainStoryboard = UIStoryboard.init(name: "Main", bundle: nil)
-//            let viewController = mainStoryboard.instantiateViewController(withIdentifier: "LoginViewController")
-//            window.rootViewController = viewController
-//            window.makeKeyAndVisible()
-//        }
         
         return true
     }
@@ -298,7 +303,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         guard let channelUrl = channelDict["channel_url"] as? String else { return }
         self.pushReceivedGroupChannel = channelUrl
         
-        ConnectionManager.login { user, error in
+        ConnectionManager.login { chatUser, callUser, error in
             if error == nil {
                 if self.pushReceivedGroupChannel != nil {
                     if let vc = UIViewController.currentViewController() {

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import SendBirdSDK
+import SendBirdCalls
 
 let ErrorDomainConnection = "com.sendbird.sample.connection"
 let ErrorDomainUser = "com.sendbird.sample.user"
@@ -20,6 +21,8 @@ protocol ConnectionManagerDelegate: NSObjectProtocol {
 
 
 class ConnectionManager: NSObject, SBDConnectionDelegate {
+    typealias LoginHandler = ((_ chatUser: SBDUser?, _ callUser: User?, _ error: Error?) -> Void)
+    
     var observers: NSMapTable<NSString, AnyObject> = NSMapTable(keyOptions: .copyIn, valueOptions: .weakMemory)
     
     static let sharedInstance = ConnectionManager()
@@ -35,7 +38,7 @@ class ConnectionManager: NSObject, SBDConnectionDelegate {
     }
     
     static public func startLogin(){
-        login { (user, error) in
+        login { (chatUser, callUser, error) in
             if stopConnectionRetry {
                 return
             }
@@ -75,82 +78,108 @@ class ConnectionManager: NSObject, SBDConnectionDelegate {
         }
     }
     
-    static public func login(completionHandler: ((_ user: SBDUser?, _ error: NSError?) -> Void)?) {
+    static public func login(completionHandler: LoginHandler?) {
         let userDefault = UserDefaults.standard
-        let userId: String? = userDefault.value(forKey: "sendbird_user_id") as? String
-        let userNickname: String? = userDefault.value(forKey: "sendbird_user_nickname") as? String
         
-        guard let theUserId: String = userId, let theNickname: String = userNickname else {
-            if let handler: ((_ :SBDUser?, _ :NSError?) -> ()) = completionHandler {
-                let error: NSError = NSError(domain: ErrorDomainConnection, code: -1, userInfo: [NSLocalizedDescriptionKey:"User id or user nickname is nil.",NSLocalizedFailureReasonErrorKey:"Saved user data does not exist."])
-                handler(nil, error)
-            }
+        guard let userId = userDefault.value(forKey: "sendbird_user_id") as? String,
+              let userNickname = userDefault.value(forKey: "sendbird_user_nickname") as? String else {
+            
+            let error = NSError(domain: ErrorDomainConnection, code: -1, userInfo: [NSLocalizedDescriptionKey:"User id or user nickname is nil.",NSLocalizedFailureReasonErrorKey:"Saved user data does not exist."])
+            completionHandler?(nil, nil, error)
             return
         }
         
-        self.login(userId: theUserId, nickname: theNickname, completionHandler: completionHandler)
+        self.login(userId: userId, nickname: userNickname, completionHandler: completionHandler)
     }
     
-    static public func login(userId: String, nickname: String, completionHandler: ((_ user: SBDUser?, _ error: NSError?) -> Void)?) {
+    static public func login(userId: String, nickname: String, completionHandler: LoginHandler?) {
         self.sharedInstance.login(userId: userId, nickname: nickname, completionHandler: completionHandler)
     }
     
-    private func login(userId: String, nickname: String, completionHandler: ((_ user: SBDUser?, _ error: NSError?) -> Void)?) {
-        SBDMain.connect(withUserId: userId) { (user, error) in
-            let userDefault = UserDefaults.standard
+    private func login(userId: String, nickname: String, completionHandler: LoginHandler?) {
+        var loginError: Error?
+        var chatUser: SBDUser?
+        var callUser: User?
+        
+        let group = DispatchGroup()
+        
+        group.enter()
+        SendBirdCall.authenticate(with: AuthenticateParams(userId: userId)) { (user, error) in
+            guard error == nil else {
+                loginError = error
+                group.leave()
+                return
+            }
+            callUser = user
             
-            if let theError: NSError = error {
-                if let handler = completionHandler {
-                    var userInfo: [String: Any] = Dictionary()
-                    if let reason: String = theError.localizedFailureReason {
-                        userInfo[NSLocalizedFailureReasonErrorKey] = reason
-                    }
-                    userInfo[NSLocalizedDescriptionKey] = theError.localizedDescription
-                    userInfo[NSUnderlyingErrorKey] = theError
-                    let connectionError: NSError = NSError.init(domain: ErrorDomainConnection, code: theError.code, userInfo: userInfo)
-                    handler(nil, connectionError)
+            if let pushToken = UserDefaults.standard.value(forKey: "sendbird.calls.voip_push") as? Data {
+                SendBirdCall.registerVoIPPush(token: pushToken) { error in
+                    print("VoIP Push Token Registered with error: \(String(describing: error))")
+                    group.leave()
                 }
+            } else { group.leave() }
+        }
+        
+        group.enter()
+        
+        DispatchQueue.main.async {
+            SBDMain.connect(withUserId: userId, accessToken: nil) { (user, error) in
+                let userDefault = UserDefaults.standard
+                guard error == nil else {
+                    loginError = error
+                    group.leave()
+                    return
+                }
+                
+                chatUser = user
+                
+                if let pushToken = SBDMain.getPendingPushToken() {
+                    SBDMain.registerDevicePushToken(pushToken, unique: true, completionHandler: { (status, error) in
+                        guard let _: SBDError = error else {
+                            print("APNS registration failed.")
+                            return
+                        }
+                        
+                        if status == .pending {
+                            print("Push registration is pending.")
+                        }
+                        else {
+                            print("APNS Token is registered.")
+                        }
+                    })
+                }
+                
+                self.broadcastConnection(isReconnection: false)
+                
+                SBDMain.getDoNotDisturb { (isDoNotDisturbOn, startHour, startMin, endHour, endMin, timezone, error) in
+                    UserDefaults.standard.set(startHour, forKey: "sendbird_dnd_start_hour")
+                    UserDefaults.standard.set(startMin, forKey: "sendbird_dnd_start_min")
+                    UserDefaults.standard.set(endHour, forKey: "sendbird_dnd_end_hour")
+                    UserDefaults.standard.set(endMin, forKey: "sendbird_dnd_end_min")
+                    UserDefaults.standard.set(isDoNotDisturbOn, forKey: "sendbird_dnd_on")
+                    UserDefaults.standard.synchronize()
+                }
+                
+                if nickname != SBDMain.getCurrentUser()?.nickname {
+                    SBDMain.updateCurrentUserInfo(withNickname: nickname, profileUrl: nil, completionHandler: { (error) in
+                        group.leave()
+                    })
+                } else {
+                    group.leave()
+                }
+                
+                userDefault.setValue(SBDMain.getCurrentUser()?.userId, forKey: "sendbird_user_id")
+                userDefault.setValue(SBDMain.getCurrentUser()?.nickname, forKey: "sendbird_user_nickname")
+                userDefault.setValue(true, forKey: "sendbird_auto_login")
+            }
+        }
+        group.notify(queue: DispatchQueue.main) {
+            guard let chatUser = chatUser, let callUser = callUser else {
+                completionHandler?(nil, nil, loginError)
                 return
             }
             
-            if let pushToken: Data = SBDMain.getPendingPushToken() {
-                SBDMain.registerDevicePushToken(pushToken, unique: true, completionHandler: { (status, error) in
-                    guard let _: SBDError = error else {
-                        print("APNS registration failed.")
-                        return
-                    }
-                    
-                    if status == .pending {
-                        print("Push registration is pending.")
-                    }
-                    else {
-                        print("APNS Token is registered.")
-                    }
-                })
-            }
-            
-            self.broadcastConnection(isReconnection: false)
-            
-            SBDMain.getDoNotDisturb { (isDoNotDisturbOn, startHour, startMin, endHour, endMin, timezone, error) in
-                UserDefaults.standard.set(startHour, forKey: "sendbird_dnd_start_hour")
-                UserDefaults.standard.set(startMin, forKey: "sendbird_dnd_start_min")
-                UserDefaults.standard.set(endHour, forKey: "sendbird_dnd_end_hour")
-                UserDefaults.standard.set(endMin, forKey: "sendbird_dnd_end_min")
-                UserDefaults.standard.set(isDoNotDisturbOn, forKey: "sendbird_dnd_on")
-                UserDefaults.standard.synchronize()
-            }
-            
-            if nickname != SBDMain.getCurrentUser()?.nickname {
-                SBDMain.updateCurrentUserInfo(withNickname: nickname, profileUrl: nil, completionHandler: { (error) in
-                    completionHandler?(user, nil)
-                })
-            } else {
-                completionHandler?(user, nil)
-            }
-            
-            userDefault.setValue(SBDMain.getCurrentUser()?.userId, forKey: "sendbird_user_id")
-            userDefault.setValue(SBDMain.getCurrentUser()?.nickname, forKey: "sendbird_user_nickname")
-            userDefault.setValue(true, forKey: "sendbird_auto_login")
+            completionHandler?(chatUser, callUser, nil)
         }
     }
     
@@ -159,8 +188,12 @@ class ConnectionManager: NSObject, SBDConnectionDelegate {
     }
     
     private func logout(completionHandler: (() -> Void)?) {
+        let group = DispatchGroup()
+        
+        group.enter()
         SBDMain.disconnect {
             self.broadcastDisconnection()
+            
             let userDefault = UserDefaults.standard            
             userDefault.setValue(false, forKey: "sendbird_auto_login")
             userDefault.removeObject(forKey: "sendbird_dnd_start_hour")
@@ -172,9 +205,21 @@ class ConnectionManager: NSObject, SBDConnectionDelegate {
             
             UIApplication.shared.applicationIconBadgeNumber = 0
             
-            if let handler: () -> Void = completionHandler {
-                handler()
+            group.leave()
+        }
+        
+        group.enter()
+        let deauthenticate: ((SBCError?) -> Void) = { _ in
+            SendBirdCall.deauthenticate { error in
+                group.leave()
             }
+        }
+        if let voipPushToken = UserDefaults.standard.value(forKey: "sendbird.calls.voip_push") as? Data {
+            SendBirdCall.unregisterVoIPPush(token: voipPushToken, completionHandler: deauthenticate)
+        } else { deauthenticate(nil) }
+        
+        group.notify(queue: DispatchQueue.main) {
+            completionHandler?()
         }
     }
     
