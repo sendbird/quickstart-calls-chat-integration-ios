@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0AF4317DF9C9015AD6E42D75 /* Pods_DeliveryReceiptNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC474A8A3507C0ECB1034EBD /* Pods_DeliveryReceiptNotificationService.framework */; };
+		4C8F8BF60661BD2A5FFDCD1F /* Pods_DeliveryReceiptNotificationService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D99ACB5E32FDFCABE7CE2B4A /* Pods_DeliveryReceiptNotificationService.framework */; };
+		520224FF2518494200F40F3E /* GroupChannelOutgoingCallMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 527FA7892518296600E9BA79 /* GroupChannelOutgoingCallMessageTableViewCell.xib */; };
+		520225002518494200F40F3E /* GroupChannelIncomingCallMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527FA7882518295D00E9BA79 /* GroupChannelIncomingCallMessageTableViewCell.swift */; };
+		520225012518494200F40F3E /* GroupChannelIncomingCallMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 527FA7872518295D00E9BA79 /* GroupChannelIncomingCallMessageTableViewCell.xib */; };
+		520225022518494200F40F3E /* AppDelegate+SendBirdCallsDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527FA7D22518313B00E9BA79 /* AppDelegate+SendBirdCallsDelegates.swift */; };
+		520225032518494200F40F3E /* GroupChannelOutgoingCallMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527FA78A2518296600E9BA79 /* GroupChannelOutgoingCallMessageTableViewCell.swift */; };
+		5202250725184FE300F40F3E /* CallingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5202250625184FE300F40F3E /* CallingViewController.xib */; };
+		5202250B2518500F00F40F3E /* CallingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5202250A2518500F00F40F3E /* CallingViewController.swift */; };
 		520FF86822E6869100A9D7F4 /* GroupChannel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520FF86722E6869100A9D7F4 /* GroupChannel.storyboard */; };
 		520FF86A22E6869F00A9D7F4 /* OpenChannel.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520FF86922E6869F00A9D7F4 /* OpenChannel.storyboard */; };
 		520FF86C22E686A900A9D7F4 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 520FF86B22E686A900A9D7F4 /* Settings.storyboard */; };
@@ -15,13 +22,18 @@
 		5215271C22E01AF000F2F011 /* SelectableUserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215271B22E01AF000F2F011 /* SelectableUserTableViewCell.swift */; };
 		5215677D22E92D3B00C12632 /* GroupChannelMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215677C22E92D3B00C12632 /* GroupChannelMessageTableViewCell.swift */; };
 		5215677F22E93E7300C12632 /* OpenChannelMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5215677E22E93E7300C12632 /* OpenChannelMessageTableViewCell.swift */; };
+		527FA7DF251831B200E9BA79 /* CXCallManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527FA7D02518313A00E9BA79 /* CXCallManager.swift */; };
+		527FA7E0251831B200E9BA79 /* CXProvider+QuickStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527FA7D12518313B00E9BA79 /* CXProvider+QuickStart.swift */; };
+		527FA7E4251831E400E9BA79 /* Data+SendBird.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527FA7E3251831E400E9BA79 /* Data+SendBird.swift */; };
+		528B491F25907CE9005C18D1 /* CallInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528B491E25907CE9005C18D1 /* CallInfo.swift */; };
+		52A2A4602591D3F6009E0C10 /* DeliveryReceiptNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E2FE950E2489362800169552 /* DeliveryReceiptNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		52A7297D22E689B6004BD1CB /* SelectableUserTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 52A7297C22E689B6004BD1CB /* SelectableUserTableViewCell.xib */; };
 		52B4779822E1626000C3F598 /* CreateGroupChannelNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B4779722E1625F00C3F598 /* CreateGroupChannelNavigationController.swift */; };
 		52CD29D42358314D008F3F89 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52CD29D32358314D008F3F89 /* WebViewController.swift */; };
 		52E3D35922E6D8820099D67D /* ImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D35822E6D8820099D67D /* ImageUtil.swift */; };
 		52E3D35B22E6D8E00099D67D /* GroupChannelIncomingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D35A22E6D8E00099D67D /* GroupChannelIncomingMessageTableViewCell.swift */; };
 		52E3D35F22E6FCBD0099D67D /* GroupChannelOutgoingMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E3D35E22E6FCBC0099D67D /* GroupChannelOutgoingMessageTableViewCell.swift */; };
-		875BF66943D4A22B9064F1B1 /* Pods_SendBird_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D2F8289F5E5EFDE1D2C9038 /* Pods_SendBird_iOS.framework */; };
+		7269F12ABD241613820E318E /* Pods_SendBird_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 799F378BA6A8F35FDF40B5B9 /* Pods_SendBird_iOS.framework */; };
 		A92B79E6230F964A008C522A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A92B79E5230F964A008C522A /* SceneDelegate.swift */; };
 		A94CC22823669E7500608E27 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94CC22723669E7500608E27 /* ConnectionManager.swift */; };
 		A9EB20102314ED7300FC3FC8 /* SelectedUserCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A9EB200F2314ED7300FC3FC8 /* SelectedUserCollectionViewCell.xib */; };
@@ -131,11 +143,10 @@
 		E2D0C15121935A580080A5F3 /* GroupChannelIncomingAudioFileMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2D0C14F21935A580080A5F3 /* GroupChannelIncomingAudioFileMessageTableViewCell.swift */; };
 		E2D0C15221935A580080A5F3 /* GroupChannelIncomingAudioFileMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E2D0C15021935A580080A5F3 /* GroupChannelIncomingAudioFileMessageTableViewCell.xib */; };
 		E2FE95112489362800169552 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FE95102489362800169552 /* NotificationService.swift */; };
-		E2FE95152489362800169552 /* DeliveryReceiptNotificationService.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E2FE950E2489362800169552 /* DeliveryReceiptNotificationService.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E2FE95132489362800169552 /* PBXContainerItemProxy */ = {
+		52A2A4612591D3F6009E0C10 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E21CDFB92165619000839683 /* Project object */;
 			proxyType = 1;
@@ -145,13 +156,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		E2FE95192489362800169552 /* Embed App Extensions */ = {
+		52A2A4632591D3F6009E0C10 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				E2FE95152489362800169552 /* DeliveryReceiptNotificationService.appex in Embed App Extensions */,
+				52A2A4602591D3F6009E0C10 /* DeliveryReceiptNotificationService.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,10 +170,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1D2F8289F5E5EFDE1D2C9038 /* Pods_SendBird_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendBird_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		242DF2B66EC1C23C02CBA3ED /* Pods-DeliveryReceiptNotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryReceiptNotificationService.release.xcconfig"; path = "Pods/Target Support Files/Pods-DeliveryReceiptNotificationService/Pods-DeliveryReceiptNotificationService.release.xcconfig"; sourceTree = "<group>"; };
-		2E6C95EE3B9E1E3E5316ABBC /* Pods-SendBird-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendBird-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		4AE17B58DD188A15F84A0409 /* Pods-SendBird-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendBird-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		1C68183A7F7089219AB0FD3D /* Pods-SendBird-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendBird-iOS.release.xcconfig"; path = "Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		5202250625184FE300F40F3E /* CallingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CallingViewController.xib; sourceTree = "<group>"; };
+		5202250A2518500F00F40F3E /* CallingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallingViewController.swift; sourceTree = "<group>"; };
 		520FF86722E6869100A9D7F4 /* GroupChannel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = GroupChannel.storyboard; sourceTree = "<group>"; };
 		520FF86922E6869F00A9D7F4 /* OpenChannel.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OpenChannel.storyboard; sourceTree = "<group>"; };
 		520FF86B22E686A900A9D7F4 /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
@@ -170,18 +180,33 @@
 		5215271B22E01AF000F2F011 /* SelectableUserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectableUserTableViewCell.swift; sourceTree = "<group>"; };
 		5215677C22E92D3B00C12632 /* GroupChannelMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChannelMessageTableViewCell.swift; sourceTree = "<group>"; };
 		5215677E22E93E7300C12632 /* OpenChannelMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenChannelMessageTableViewCell.swift; sourceTree = "<group>"; };
+		526B31B5256F92BC00E69187 /* SendBirdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SendBirdSDK.framework; path = "../../Messaging/messaging-ios/Carthage/Build/iOS/SendBirdSDK.framework"; sourceTree = "<group>"; };
+		526B31E2256F948F00E69187 /* SendBirdSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SendBirdSDK.framework; sourceTree = "<group>"; };
+		527FA7872518295D00E9BA79 /* GroupChannelIncomingCallMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupChannelIncomingCallMessageTableViewCell.xib; sourceTree = "<group>"; };
+		527FA7882518295D00E9BA79 /* GroupChannelIncomingCallMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChannelIncomingCallMessageTableViewCell.swift; sourceTree = "<group>"; };
+		527FA7892518296600E9BA79 /* GroupChannelOutgoingCallMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GroupChannelOutgoingCallMessageTableViewCell.xib; sourceTree = "<group>"; };
+		527FA78A2518296600E9BA79 /* GroupChannelOutgoingCallMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChannelOutgoingCallMessageTableViewCell.swift; sourceTree = "<group>"; };
+		527FA7D02518313A00E9BA79 /* CXCallManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CXCallManager.swift; path = ../CXCallManager.swift; sourceTree = "<group>"; };
+		527FA7D12518313B00E9BA79 /* CXProvider+QuickStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "CXProvider+QuickStart.swift"; path = "../CXProvider+QuickStart.swift"; sourceTree = "<group>"; };
+		527FA7D22518313B00E9BA79 /* AppDelegate+SendBirdCallsDelegates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+SendBirdCallsDelegates.swift"; sourceTree = "<group>"; };
+		527FA7E3251831E400E9BA79 /* Data+SendBird.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+SendBird.swift"; sourceTree = "<group>"; };
+		528B491E25907CE9005C18D1 /* CallInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallInfo.swift; sourceTree = "<group>"; };
 		52A7297C22E689B6004BD1CB /* SelectableUserTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectableUserTableViewCell.xib; sourceTree = "<group>"; };
 		52B4779722E1625F00C3F598 /* CreateGroupChannelNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateGroupChannelNavigationController.swift; sourceTree = "<group>"; };
 		52CD29D32358314D008F3F89 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		52E3D35822E6D8820099D67D /* ImageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUtil.swift; sourceTree = "<group>"; };
 		52E3D35A22E6D8E00099D67D /* GroupChannelIncomingMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChannelIncomingMessageTableViewCell.swift; sourceTree = "<group>"; };
 		52E3D35E22E6FCBC0099D67D /* GroupChannelOutgoingMessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupChannelOutgoingMessageTableViewCell.swift; sourceTree = "<group>"; };
+		5F34AE3672486393969597AA /* Pods-DeliveryReceiptNotificationService.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryReceiptNotificationService.release.xcconfig"; path = "Target Support Files/Pods-DeliveryReceiptNotificationService/Pods-DeliveryReceiptNotificationService.release.xcconfig"; sourceTree = "<group>"; };
+		799F378BA6A8F35FDF40B5B9 /* Pods_SendBird_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SendBird_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		81248850EAA0C5EE8FDA126C /* Pods-DeliveryReceiptNotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryReceiptNotificationService.debug.xcconfig"; path = "Target Support Files/Pods-DeliveryReceiptNotificationService/Pods-DeliveryReceiptNotificationService.debug.xcconfig"; sourceTree = "<group>"; };
+		919A583BD549BD535FB793AD /* Pods-SendBird-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SendBird-iOS.debug.xcconfig"; path = "Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		A92B79E5230F964A008C522A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A94CC22723669E7500608E27 /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		A9EB200F2314ED7300FC3FC8 /* SelectedUserCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectedUserCollectionViewCell.xib; sourceTree = "<group>"; };
 		A9EB20112314EDF000FC3FC8 /* SelectedUserCollectioViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedUserCollectioViewCell.swift; sourceTree = "<group>"; };
 		A9FBF70D22FCFB10000E146B /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
-		B708CB176B8FEB1D3572B68F /* Pods-DeliveryReceiptNotificationService.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeliveryReceiptNotificationService.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DeliveryReceiptNotificationService/Pods-DeliveryReceiptNotificationService.debug.xcconfig"; sourceTree = "<group>"; };
+		D99ACB5E32FDFCABE7CE2B4A /* Pods_DeliveryReceiptNotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeliveryReceiptNotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21C53E32195DB7900782B60 /* GroupChannelSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupChannelSettingsViewController.swift; sourceTree = "<group>"; };
 		E21CDFC12165619000839683 /* SendBird-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SendBird-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E21CDFC42165619000839683 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -293,7 +318,6 @@
 		E2FE95102489362800169552 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		E2FE95122489362800169552 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E2FE951A24893A1200169552 /* DeliveryReceiptNotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DeliveryReceiptNotificationService.entitlements; sourceTree = "<group>"; };
-		EC474A8A3507C0ECB1034EBD /* Pods_DeliveryReceiptNotificationService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeliveryReceiptNotificationService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,7 +325,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				875BF66943D4A22B9064F1B1 /* Pods_SendBird_iOS.framework in Frameworks */,
+				7269F12ABD241613820E318E /* Pods_SendBird_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,7 +333,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AF4317DF9C9015AD6E42D75 /* Pods_DeliveryReceiptNotificationService.framework in Frameworks */,
+				4C8F8BF60661BD2A5FFDCD1F /* Pods_DeliveryReceiptNotificationService.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,22 +351,38 @@
 			path = ViewCells;
 			sourceTree = "<group>";
 		};
-		62D50C290F9081E9FB190D9F /* Pods */ = {
+		527FA7862518293B00E9BA79 /* ChatCall */ = {
 			isa = PBXGroup;
 			children = (
-				4AE17B58DD188A15F84A0409 /* Pods-SendBird-iOS.debug.xcconfig */,
-				2E6C95EE3B9E1E3E5316ABBC /* Pods-SendBird-iOS.release.xcconfig */,
-				B708CB176B8FEB1D3572B68F /* Pods-DeliveryReceiptNotificationService.debug.xcconfig */,
-				242DF2B66EC1C23C02CBA3ED /* Pods-DeliveryReceiptNotificationService.release.xcconfig */,
+				527FA7882518295D00E9BA79 /* GroupChannelIncomingCallMessageTableViewCell.swift */,
+				527FA7872518295D00E9BA79 /* GroupChannelIncomingCallMessageTableViewCell.xib */,
+				527FA78A2518296600E9BA79 /* GroupChannelOutgoingCallMessageTableViewCell.swift */,
+				527FA7892518296600E9BA79 /* GroupChannelOutgoingCallMessageTableViewCell.xib */,
+				527FA7D22518313B00E9BA79 /* AppDelegate+SendBirdCallsDelegates.swift */,
+				5202250625184FE300F40F3E /* CallingViewController.xib */,
+				5202250A2518500F00F40F3E /* CallingViewController.swift */,
+				528B491E25907CE9005C18D1 /* CallInfo.swift */,
+				527FA7D32518313B00E9BA79 /* CXExtensions */,
 			);
-			name = Pods;
+			path = ChatCall;
+			sourceTree = "<group>";
+		};
+		527FA7D32518313B00E9BA79 /* CXExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				527FA7D02518313A00E9BA79 /* CXCallManager.swift */,
+				527FA7D12518313B00E9BA79 /* CXProvider+QuickStart.swift */,
+			);
+			path = CXExtensions;
 			sourceTree = "<group>";
 		};
 		DDAA521D90BDFBA7AA74D1FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1D2F8289F5E5EFDE1D2C9038 /* Pods_SendBird_iOS.framework */,
-				EC474A8A3507C0ECB1034EBD /* Pods_DeliveryReceiptNotificationService.framework */,
+				526B31B5256F92BC00E69187 /* SendBirdSDK.framework */,
+				526B31E2256F948F00E69187 /* SendBirdSDK.framework */,
+				D99ACB5E32FDFCABE7CE2B4A /* Pods_DeliveryReceiptNotificationService.framework */,
+				799F378BA6A8F35FDF40B5B9 /* Pods_SendBird_iOS.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -353,8 +393,8 @@
 				E21CDFC32165619000839683 /* SendBird-iOS */,
 				E2FE950F2489362800169552 /* DeliveryReceiptNotificationService */,
 				E21CDFC22165619000839683 /* Products */,
-				62D50C290F9081E9FB190D9F /* Pods */,
 				DDAA521D90BDFBA7AA74D1FA /* Frameworks */,
+				F33DE019B89E593DEAE4F39A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -370,6 +410,7 @@
 		E21CDFC32165619000839683 /* SendBird-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				527FA7862518293B00E9BA79 /* ChatCall */,
 				5215271822E018EB00F2F011 /* ViewCells */,
 				E27E3FB2217E83AE0082C91C /* DownloadManager */,
 				E27E3F882177BC130082C91C /* UserProfile */,
@@ -427,6 +468,7 @@
 				E27E3F0A21753E970082C91C /* Constants.swift */,
 				E27E3FB0217E70C60082C91C /* String+SendBird.swift */,
 				E23CF9FF2180D6E000A946E8 /* Array+SendBird.swift */,
+				527FA7E3251831E400E9BA79 /* Data+SendBird.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -738,6 +780,17 @@
 			path = DeliveryReceiptNotificationService;
 			sourceTree = "<group>";
 		};
+		F33DE019B89E593DEAE4F39A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				81248850EAA0C5EE8FDA126C /* Pods-DeliveryReceiptNotificationService.debug.xcconfig */,
+				5F34AE3672486393969597AA /* Pods-DeliveryReceiptNotificationService.release.xcconfig */,
+				919A583BD549BD535FB793AD /* Pods-SendBird-iOS.debug.xcconfig */,
+				1C68183A7F7089219AB0FD3D /* Pods-SendBird-iOS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -745,17 +798,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E21CDFD32165619100839683 /* Build configuration list for PBXNativeTarget "SendBird-iOS" */;
 			buildPhases = (
-				C1666900EFFF3239F9C5C037 /* [CP] Check Pods Manifest.lock */,
+				9A40D184320E4B140837F0B5 /* [CP] Check Pods Manifest.lock */,
 				E21CDFBD2165619000839683 /* Sources */,
 				E21CDFBE2165619000839683 /* Frameworks */,
 				E21CDFBF2165619000839683 /* Resources */,
-				57774F9CC0D03BA2A16C5DCD /* [CP] Embed Pods Frameworks */,
-				E2FE95192489362800169552 /* Embed App Extensions */,
+				52A2A4632591D3F6009E0C10 /* Embed App Extensions */,
+				8FDF39EC6D12F74B1A841693 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				E2FE95142489362800169552 /* PBXTargetDependency */,
+				52A2A4622591D3F6009E0C10 /* PBXTargetDependency */,
 			);
 			name = "SendBird-iOS";
 			productName = "SendBird-iOS";
@@ -766,7 +819,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E2FE95162489362800169552 /* Build configuration list for PBXNativeTarget "DeliveryReceiptNotificationService" */;
 			buildPhases = (
-				5B4C8C3C99660BC68AD3BB3B /* [CP] Check Pods Manifest.lock */,
+				39327FA210583FF087577643 /* [CP] Check Pods Manifest.lock */,
 				E2FE950A2489362800169552 /* Sources */,
 				E2FE950B2489362800169552 /* Frameworks */,
 				E2FE950C2489362800169552 /* Resources */,
@@ -850,10 +903,13 @@
 				520FF86A22E6869F00A9D7F4 /* OpenChannel.storyboard in Resources */,
 				A9EB20102314ED7300FC3FC8 /* SelectedUserCollectionViewCell.xib in Resources */,
 				E2D0C15221935A580080A5F3 /* GroupChannelIncomingAudioFileMessageTableViewCell.xib in Resources */,
+				520225012518494200F40F3E /* GroupChannelIncomingCallMessageTableViewCell.xib in Resources */,
 				E21CDFCA2165619000839683 /* Main.storyboard in Resources */,
 				E2D0C14621924A5D0080A5F3 /* GroupChannelOutgoingGeneralFileMessageTableViewCell.xib in Resources */,
 				E27E3F962179110E0082C91C /* OpenChannelImageVideoFileMessageTableViewCell.xib in Resources */,
+				5202250725184FE300F40F3E /* CallingViewController.xib in Resources */,
 				E27E3EF32174D8920082C91C /* loading_typing.gif in Resources */,
+				520224FF2518494200F40F3E /* GroupChannelOutgoingCallMessageTableViewCell.xib in Resources */,
 				E27E3F8C2177BC8C0082C91C /* UserProfileViewController.xib in Resources */,
 				E2D0C14E21924A820080A5F3 /* GroupChannelNeutralAdminMessageTableViewCell.xib in Resources */,
 				52A7297D22E689B6004BD1CB /* SelectableUserTableViewCell.xib in Resources */,
@@ -871,24 +927,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		57774F9CC0D03BA2A16C5DCD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		5B4C8C3C99660BC68AD3BB3B /* [CP] Check Pods Manifest.lock */ = {
+		39327FA210583FF087577643 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -910,16 +949,37 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C1666900EFFF3239F9C5C037 /* [CP] Check Pods Manifest.lock */ = {
+		8FDF39EC6D12F74B1A841693 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SendBird-iOS/Pods-SendBird-iOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9A40D184320E4B140837F0B5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-SendBird-iOS-checkManifestLockResult.txt",
 			);
@@ -937,10 +997,12 @@
 			files = (
 				E2D0C0D2218B82B80080A5F3 /* OpenChannelCoverImageNameSettingViewController.swift in Sources */,
 				E2D0C14521924A5D0080A5F3 /* GroupChannelOutgoingGeneralFileMessageTableViewCell.swift in Sources */,
+				527FA7E4251831E400E9BA79 /* Data+SendBird.swift in Sources */,
 				A92B79E6230F964A008C522A /* SceneDelegate.swift in Sources */,
 				E27E3EEC217159E30082C91C /* CustomActivityIndicatorView.swift in Sources */,
 				E27E3FB4217E83D10082C91C /* DownloadManager.swift in Sources */,
 				A94CC22823669E7500608E27 /* ConnectionManager.swift in Sources */,
+				520225002518494200F40F3E /* GroupChannelIncomingCallMessageTableViewCell.swift in Sources */,
 				E298FFE5219F1FCC009F83D0 /* GroupChannelSettingsChannelCoverNameTableViewCell.swift in Sources */,
 				E27E3FAC217A7A190082C91C /* FLAnimatedImageView+ImageLoader.swift in Sources */,
 				E27E3FAA21793E7E0082C91C /* CustomProgressCircle.swift in Sources */,
@@ -975,6 +1037,7 @@
 				E27E3FA1217911520082C91C /* OpenChannelAudioFileMessageTableViewCell.swift in Sources */,
 				E21CDFC72165619000839683 /* ViewController.swift in Sources */,
 				E2D0C0EF218B9FB50080A5F3 /* OpenChannelSettingsChannelNameTableViewCellDelegate.swift in Sources */,
+				5202250B2518500F00F40F3E /* CallingViewController.swift in Sources */,
 				E298000B219F4938009F83D0 /* GroupChannelCoverImageNameSettingViewController.swift in Sources */,
 				E27E3FAF217E23460082C91C /* OpenChannelSettingsDelegate.swift in Sources */,
 				E27E3F592177A9E70082C91C /* SettingsTableViewCellDelegate.swift in Sources */,
@@ -989,6 +1052,7 @@
 				E27E3F502177A8A10082C91C /* UpdateUserProfileViewController.swift in Sources */,
 				52E3D35922E6D8820099D67D /* ImageUtil.swift in Sources */,
 				E27E3F1B217663350082C91C /* OpenChanannelChatDelegate.swift in Sources */,
+				528B491F25907CE9005C18D1 /* CallInfo.swift in Sources */,
 				E27E3F16217661EE0082C91C /* OpenChannelsViewController.swift in Sources */,
 				E27E3F6E2177B7BD0082C91C /* SettingsTimeTableViewCell.swift in Sources */,
 				E27E3F5D2177AA530082C91C /* UserProfileImageNameSettingDelegate.swift in Sources */,
@@ -1003,6 +1067,7 @@
 				E298FFEF219F243D009F83D0 /* GroupChannelSettingsNotificationsTableViewCell.swift in Sources */,
 				E27E3F542177A8B50082C91C /* SettingsBlockedUserListViewController.swift in Sources */,
 				E2D0C105218D07120080A5F3 /* GroupChannelChatViewController.swift in Sources */,
+				527FA7DF251831B200E9BA79 /* CXCallManager.swift in Sources */,
 				E2D0C0CC218A41160080A5F3 /* CustomPhotosViewController.swift in Sources */,
 				E21CDFE12165780900839683 /* CustomTextField.swift in Sources */,
 				E27E3F19217662EC0082C91C /* CreateOpenChannelDelegate.swift in Sources */,
@@ -1011,6 +1076,8 @@
 				E27E3F8B2177BC8C0082C91C /* UserProfileViewController.swift in Sources */,
 				5215271C22E01AF000F2F011 /* SelectableUserTableViewCell.swift in Sources */,
 				E2D0C15121935A580080A5F3 /* GroupChannelIncomingAudioFileMessageTableViewCell.swift in Sources */,
+				520225032518494200F40F3E /* GroupChannelOutgoingCallMessageTableViewCell.swift in Sources */,
+				520225022518494200F40F3E /* AppDelegate+SendBirdCallsDelegates.swift in Sources */,
 				E2D0C13721924A0D0080A5F3 /* GroupChannelIncomingGeneralFileMessageTableViewCell.swift in Sources */,
 				E27E3F822177BACB0082C91C /* BlockedUserTableViewCell.swift in Sources */,
 				E2D0C12F219249E70080A5F3 /* GroupChannelIncomingUserMessageTableViewCell.swift in Sources */,
@@ -1025,6 +1092,7 @@
 				E21C53E52195DB7900782B60 /* GroupChannelSettingsViewController.swift in Sources */,
 				E27E3F21217670B00082C91C /* CreateOpenChannelNavigationController.swift in Sources */,
 				E27E3EE9217156A60082C91C /* GroupChannelsViewController.swift in Sources */,
+				527FA7E0251831B200E9BA79 /* CXProvider+QuickStart.swift in Sources */,
 				E27E3F99217911240082C91C /* OpenChannelGeneralFileMessageTableViewCell.swift in Sources */,
 				5215677F22E93E7300C12632 /* OpenChannelMessageTableViewCell.swift in Sources */,
 				5215271722E0078500F2F011 /* SettingsTimeViewController.swift in Sources */,
@@ -1045,10 +1113,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E2FE95142489362800169552 /* PBXTargetDependency */ = {
+		52A2A4622591D3F6009E0C10 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E2FE950D2489362800169552 /* DeliveryReceiptNotificationService */;
-			targetProxy = E2FE95132489362800169552 /* PBXContainerItemProxy */;
+			targetProxy = 52A2A4612591D3F6009E0C10 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1190,14 +1258,18 @@
 		};
 		E21CDFD42165619100839683 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AE17B58DD188A15F84A0409 /* Pods-SendBird-iOS.debug.xcconfig */;
+			baseConfigurationReference = 919A583BD549BD535FB793AD /* Pods-SendBird-iOS.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "SendBird-iOS/SendBird-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RM4A5PXTUX;
+				EXCLUDED_ARCHS = armv7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "SendBird-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1214,14 +1286,18 @@
 		};
 		E21CDFD52165619100839683 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E6C95EE3B9E1E3E5316ABBC /* Pods-SendBird-iOS.release.xcconfig */;
+			baseConfigurationReference = 1C68183A7F7089219AB0FD3D /* Pods-SendBird-iOS.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "SendBird-iOS/SendBird-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RM4A5PXTUX;
+				EXCLUDED_ARCHS = armv7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "SendBird-iOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1237,7 +1313,7 @@
 		};
 		E2FE95172489362800169552 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B708CB176B8FEB1D3572B68F /* Pods-DeliveryReceiptNotificationService.debug.xcconfig */;
+			baseConfigurationReference = 81248850EAA0C5EE8FDA126C /* Pods-DeliveryReceiptNotificationService.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = DeliveryReceiptNotificationService/DeliveryReceiptNotificationService.entitlements;
@@ -1245,7 +1321,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RM4A5PXTUX;
 				INFOPLIST_FILE = DeliveryReceiptNotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1261,7 +1337,7 @@
 		};
 		E2FE95182489362800169552 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 242DF2B66EC1C23C02CBA3ED /* Pods-DeliveryReceiptNotificationService.release.xcconfig */;
+			baseConfigurationReference = 5F34AE3672486393969597AA /* Pods-DeliveryReceiptNotificationService.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = DeliveryReceiptNotificationService/DeliveryReceiptNotificationService.entitlements;
@@ -1269,7 +1345,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = RM4A5PXTUX;
 				INFOPLIST_FILE = DeliveryReceiptNotificationService/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

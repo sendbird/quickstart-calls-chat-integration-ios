@@ -14,6 +14,7 @@ target 'SendBird-iOS' do
   use_frameworks!
 
   # Pods for SendBird-iOS
+  pod 'SendBirdCalls'
   pod 'SendBirdSDK'
   pod 'AlamofireImage', '~> 3.4'
   pod 'RSKImageCropper'

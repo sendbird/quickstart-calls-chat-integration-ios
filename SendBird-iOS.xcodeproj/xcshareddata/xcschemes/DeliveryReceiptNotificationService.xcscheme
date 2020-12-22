@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
-   version = "1.3">
+   LastUpgradeVersion = "1230"
+   version = "2.0">
    <BuildAction
       parallelizeBuildables = "YES"
       buildImplicitDependencies = "YES">
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E21CDFC02165619000839683"
-               BuildableName = "SendBird-iOS.app"
-               BlueprintName = "SendBird-iOS"
+               BlueprintIdentifier = "E2FE950D2489362800169552"
+               BuildableName = "DeliveryReceiptNotificationService.appex"
+               BlueprintName = "DeliveryReceiptNotificationService"
                ReferencedContainer = "container:SendBird-iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -27,55 +27,38 @@
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E21CDFC02165619000839683"
-            BuildableName = "SendBird-iOS.app"
-            BlueprintName = "SendBird-iOS"
-            ReferencedContainer = "container:SendBird-iOS.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <Testables>
       </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
+      askForAppToLaunch = "Yes"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
-      allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E21CDFC02165619000839683"
-            BuildableName = "SendBird-iOS.app"
-            BlueprintName = "SendBird-iOS"
-            ReferencedContainer = "container:SendBird-iOS.xcodeproj">
-         </BuildableReference>
-      </BuildableProductRunnable>
+      allowLocationSimulation = "YES"
+      launchAutomaticallySubstyle = "2">
    </LaunchAction>
    <ProfileAction
-      buildConfiguration = "Debug"
+      buildConfiguration = "Release"
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      debugDocumentVersioning = "YES"
+      launchAutomaticallySubstyle = "2">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E21CDFC02165619000839683"
-            BuildableName = "SendBird-iOS.app"
-            BlueprintName = "SendBird-iOS"
+            BlueprintIdentifier = "E2FE950D2489362800169552"
+            BuildableName = "DeliveryReceiptNotificationService.appex"
+            BlueprintName = "DeliveryReceiptNotificationService"
             ReferencedContainer = "container:SendBird-iOS.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
