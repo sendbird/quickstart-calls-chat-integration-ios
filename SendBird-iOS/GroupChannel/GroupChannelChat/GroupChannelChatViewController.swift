@@ -16,7 +16,10 @@ import Alamofire
 import AlamofireImage
 import FLAnimatedImage
 
+import SendBirdCalls
+
 class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, RSKImageCropViewControllerDelegate, SBDChannelDelegate, GroupChannelMessageTableViewCellDelegate, GroupChannelSettingsDelegate, UIDocumentPickerDelegate, NotificationDelegate, SBDNetworkDelegate, SBDConnectionDelegate {
+    
     @IBOutlet weak var inputMessageTextField: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
     @IBOutlet weak var typingIndicatorContainerView: UIView!
@@ -31,12 +34,19 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var sendUserMessageButton: UIButton!
     @IBOutlet weak var typingIndicatorContainerViewHeight: NSLayoutConstraint!
     
-    var settingBarButton: UIBarButtonItem?
     var backButton: UIBarButtonItem?
     
     weak var delegate: GroupChannelsUpdateListDelegate?
     var channel: SBDGroupChannel?
-
+    var remoteCallUserId: String? {
+        guard let currentUserId = SendBirdCall.currentUser?.userId else { return nil }
+        return channel?
+            .members?
+            .compactMap({ $0 as? SBDMember })
+            .first(where: { $0.userId != currentUserId })?
+            .userId
+    }
+    
     var keyboardShown: Bool = false
     var keyboardHeight: CGFloat = 0
     
@@ -75,10 +85,25 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationItem.largeTitleDisplayMode = .never
-        self.settingBarButton = UIBarButtonItem(image: UIImage(named: "img_btn_channel_settings"), style: .plain, target: self, action: #selector(GroupChannelChatViewController.clickSettingBarButton(_:)))
+        let settingButton: UIButton = UIButton(type: .custom)
+        settingButton.setImage(UIImage(named: "img_btn_channel_settings"), for: [])
+        settingButton.addTarget(self, action: #selector(clickSettingBarButton(_:)), for: .touchUpInside)
+        settingButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let settingBarButton = UIBarButtonItem(customView: settingButton)
         
-        self.navigationItem.rightBarButtonItem = self.settingBarButton
+        let videoCallButton: UIButton = UIButton(type: .custom)
+        videoCallButton.setImage(UIImage(named: "icBarCallVideoFilled"), for: [])
+        videoCallButton.addTarget(self, action: #selector(clickVideoCallBarButton(_:)), for: .touchUpInside)
+        videoCallButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let videoCallBarButton = UIBarButtonItem(customView: videoCallButton)
+        
+        let voiceCallButton: UIButton = UIButton(type: .custom)
+        voiceCallButton.setImage(UIImage(named: "icBarCallFilled"), for: [])
+        voiceCallButton.addTarget(self, action: #selector(clickVoiceCallBarButton(_:)), for: .touchUpInside)
+        voiceCallButton.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        let voiceCallBarButton = UIBarButtonItem(customView: voiceCallButton)
+        
+        self.navigationItem.rightBarButtonItems = [settingBarButton, voiceCallBarButton, videoCallBarButton]
         
         if self.splitViewController?.displayMode != UISplitViewController.DisplayMode.allVisible {
             self.backButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.clickBackButton(_:)))
@@ -112,6 +137,8 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         self.messageTableView.register(GroupChannelIncomingGeneralFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingGeneralFileMessageTableViewCell")
         self.messageTableView.register(GroupChannelOutgoingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingAudioFileMessageTableViewCell")
         self.messageTableView.register(GroupChannelIncomingAudioFileMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingAudioFileMessageTableViewCell")
+        self.messageTableView.register(GroupChannelOutgoingCallMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelOutgoingCallMessageTableViewCell")
+        self.messageTableView.register(GroupChannelIncomingCallMessageTableViewCell.nib(), forCellReuseIdentifier: "GroupChannelIncomingCallMessageTableViewCell")
         
         // Input Text Field
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
@@ -190,6 +217,16 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
     
     @objc func clickSettingBarButton(_ sender: AnyObject) {
         performSegue(withIdentifier: "ShowGroupChannelSettings", sender: self)
+    }
+    
+    @objc func clickVideoCallBarButton(_ sender: AnyObject) {
+        guard let calleeId = self.remoteCallUserId else { return }
+        self.dial(userId: calleeId, isVideoCall: true)
+    }
+    
+    @objc func clickVoiceCallBarButton(_ sender: AnyObject) {
+        guard let calleeId = self.remoteCallUserId else { return }
+        self.dial(userId: calleeId, isVideoCall: false)
     }
     
     @objc func clickBackButton(_ sender: AnyObject) {
@@ -538,36 +575,72 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         else if currMessage is SBDUserMessage {
             guard let userMessage = currMessage as? SBDUserMessage else { return cell }
             guard let sender = userMessage.sender else { return cell }
-            if sender.userId == SBDMain.getCurrentUser()!.userId {
-                // Outgoing User Message
-                guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingUserMessageTableViewCell") as? GroupChannelOutgoingUserMessageTableViewCell else { return cell }
-                userMessageCell.delegate = self
-                userMessageCell.channel = self.channel
-                
-                var failed: Bool = false
-                if userMessage.requestId != "" {
-                    if self.resendableMessages[userMessage.requestId] != nil {
-                        failed = true
-                    }
-                }
             
-                userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: failed)
-                
-                cell = userMessageCell
-            }
-            else {
-                // Incoming User Message
-                guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingUserMessageTableViewCell") as? GroupChannelIncomingUserMessageTableViewCell else { return cell }
-                userMessageCell.delegate = self
-                userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage)
-                
-                DispatchQueue.main.async {
-                    guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
-                    guard let updateUserMessageCell = updateCell as? GroupChannelIncomingUserMessageTableViewCell else { return }
-                    updateUserMessageCell.profileImageView.setProfileImageView(for: sender)
+            if let detail = userMessage.getPluginDetail(for: "sendbird", type: "call"),
+               let callInfo = CallInfo(from: detail) {
+                if sender.userId == SBDMain.getCurrentUser()!.userId {
+                    guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingCallMessageTableViewCell") as? GroupChannelOutgoingCallMessageTableViewCell else { return cell }
+                    userMessageCell.delegate = self
+                    userMessageCell.channel = self.channel
+                    
+                    var failed: Bool = false
+                    if userMessage.requestId != "" {
+                        if self.resendableMessages[userMessage.requestId] != nil {
+                            failed = true
+                        }
+                    }
+                    
+                    userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: failed)
+                    userMessageCell.callInfo = callInfo
+                    
+                    cell = userMessageCell
+                } else {
+                    guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingCallMessageTableViewCell") as? GroupChannelIncomingCallMessageTableViewCell else { return cell }
+                    userMessageCell.delegate = self
+                    userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage)
+                    userMessageCell.channel = self.channel
+                    userMessageCell.callInfo = callInfo
+                    
+                    DispatchQueue.main.async {
+                        guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                        guard let updateUserMessageCell = updateCell as? GroupChannelIncomingUserMessageTableViewCell else { return }
+                        updateUserMessageCell.profileImageView.setProfileImageView(for: sender)
+                    }
+                    
+                    cell = userMessageCell
                 }
-                
-                cell = userMessageCell
+            } else {
+                if sender.userId == SBDMain.getCurrentUser()!.userId {
+                    // Outgoing User Message
+                    guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelOutgoingUserMessageTableViewCell") as? GroupChannelOutgoingUserMessageTableViewCell else { return cell }
+                    userMessageCell.delegate = self
+                    userMessageCell.channel = self.channel
+                    
+                    var failed: Bool = false
+                    if userMessage.requestId != "" {
+                        if self.resendableMessages[userMessage.requestId] != nil {
+                            failed = true
+                        }
+                    }
+                    
+                    userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage, failed: failed)
+                    
+                    cell = userMessageCell
+                }
+                else {
+                    // Incoming User Message
+                    guard let userMessageCell = tableView.dequeueReusableCell(withIdentifier: "GroupChannelIncomingUserMessageTableViewCell") as? GroupChannelIncomingUserMessageTableViewCell else { return cell }
+                    userMessageCell.delegate = self
+                    userMessageCell.setMessage(currMessage: userMessage, prevMessage: prevMessage, nextMessage: nextMessage)
+                    
+                    DispatchQueue.main.async {
+                        guard let updateCell = tableView.cellForRow(at: indexPath) else { return }
+                        guard let updateUserMessageCell = updateCell as? GroupChannelIncomingUserMessageTableViewCell else { return }
+                        updateUserMessageCell.profileImageView.setProfileImageView(for: sender)
+                    }
+                    
+                    cell = userMessageCell
+                }
             }
         }
         else if currMessage is SBDFileMessage {
@@ -1423,6 +1496,48 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
+    func didClickCallMessage(_ call: CallInfo) {
+        if let call = SendBirdCall.getCall(forCallId: call.callId), call.isOngoing {
+            let callingViewController = CallingViewController(nibName: "CallingViewController", bundle: nil)
+            callingViewController.call = call
+            
+            self.present(callingViewController, animated: true, completion: nil)
+        } else {
+            guard let remoteId = self.remoteCallUserId else { return }
+            
+            let alertController = UIAlertController(title: "Call \(remoteId)", message: nil, preferredStyle: .actionSheet)
+            let audioCallAction = UIAlertAction(title: "Audio Call", style: .default) { _ in
+                self.dial(userId: remoteId, isVideoCall: false)
+            }
+            let videoCallAction = UIAlertAction(title: "Video Call", style: .default) { _ in
+                self.dial(userId: remoteId, isVideoCall: true)
+            }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+                alertController.dismiss(animated: true, completion: nil)
+            }
+            
+            alertController.addAction(audioCallAction)
+            alertController.addAction(videoCallAction)
+            alertController.addAction(cancelAction)
+            
+            self.present(alertController, animated: true, completion: nil)
+        }
+    }
+    
+    func dial(userId: String, isVideoCall: Bool) {
+        let options = SendBirdChatOptions(channelURL: self.channel!.channelUrl)
+        SendBirdCall.dial(with: DialParams(calleeId: userId, isVideoCall: isVideoCall, callOptions: CallOptions(), sendbirdChatOptions: options)) { call, error in
+            guard let call = call else { return }
+            guard error == nil else { return }
+            DispatchQueue.main.async {
+                let callingViewController = CallingViewController(nibName: "CallingViewController", bundle: nil)
+                callingViewController.call = call
+                
+                self.present(callingViewController, animated: true, completion: nil)
+            }
         }
     }
     
@@ -2316,3 +2431,12 @@ class GroupChannelChatViewController: UIViewController, UITableViewDelegate, UIT
         }
     }
 }
+
+extension SBDBaseMessage {
+    func getPluginDetail(for vendor: String, type: String) -> [String: Any]? {
+        let firstPlugin = self.plugins?.filter({ $0.vendor == vendor }).first(where: { $0.type == type })
+        return firstPlugin?.detail
+    }
+}
+
+

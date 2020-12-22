@@ -10,6 +10,7 @@ import SendBirdSDK
 
 enum MessageCellType {
     case file, audio, imageVideo, user
+    case call
 }
 
 class GroupChannelMessageTableViewCell: UITableViewCell {

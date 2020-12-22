@@ -8,6 +8,7 @@
 
 import Foundation
 import SendBirdSDK
+import SendBirdCalls
 
 @objc protocol GroupChannelMessageTableViewCellDelegate: NSObjectProtocol {
     @objc optional func didClickResendUserMessage(_ message: SBDUserMessage);
@@ -23,4 +24,5 @@ import SendBirdSDK
     @objc optional func didClickVideoFileMessage(_ message: SBDFileMessage);
     @objc optional func didClickUserProfile(_ user: SBDUser);
     @objc optional func didClickGeneralFileMessage(_ message: SBDFileMessage);
+    @objc optional func didClickCallMessage(_ call: CallInfo);
 }
