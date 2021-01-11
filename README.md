@@ -1,1 +1,1 @@
-# iOS Quickstart for Calls integration to Chat
+# Calls integration to Chat for iOS Quickstart
