@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: quickstart-calls-chat-integration-ios
+  descritpion: iOS Sample for Sendbird Calls and Chat integration
+  annotations:
+    github.com/project-slug: sendbird/quickstart-calls-chat-integration-ios
+spec:
+  type: sample
+  lifecycle: production
+  owner: dep-client-platform
+  system: sendbird-calls
